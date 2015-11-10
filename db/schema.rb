@@ -11,14 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151101194836) do
+ActiveRecord::Schema.define(version: 20151110042230) do
+
+  create_table "documents", force: :cascade do |t|
+    t.integer "note_id",           null: false
+    t.string  "file_id",           null: false
+    t.string  "file_filename",     null: false
+    t.string  "file_size",         null: false
+    t.string  "file_content_type", null: false
+  end
 
   create_table "notes", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "user_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.string   "image_id"
+    t.string   "photo_id"
   end
 
   create_table "users", force: :cascade do |t|

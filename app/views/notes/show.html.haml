@@ -1,8 +1,19 @@
 .wrapper_with_padding
     #note_show
+        = image_tag attachment_url(@note, :photo, :fill, 300, 300, format: "jpg")
         %h1.title= @note.title
         %p= simple_format(@note.content)
+        %p= "Anexos"
+        - @note.documents.each do |document|
+            = link_to document.file_filename, attachment_url(document, :file)
+            = " -"
+            = document.file_content_type
+            = " ["
+            = number_to_human_size document.file_size
+            = "] "
+            %br
 
         .buttons
             = link_to "Edit", edit_note_path(@note), class: "button"
             = link_to "Delete", note_path(@note), method: :delete, data: { confirm: "Are you sure?" }, class: "button"
+
